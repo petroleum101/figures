@@ -40,6 +40,7 @@ ax.grid('on')
 ax.set_xlabel('Date (years)')
 ax.set_ylabel('Crude Oil Production (million barrels/day)')
 
+plt.savefig('global_production.svg')
 plt.savefig('global_production.png')
 plt.savefig('global_production.pdf')
 plt.show()
