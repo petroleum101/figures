@@ -30,7 +30,7 @@ x_t = np.asarray([integrate.odeint(lorentz_deriv, x0i, t)
 # Set up figure & 3D axis for animation
 fig = plt.figure(figsize=[7,5])
 ax = fig.add_axes([0, 0, 1, 1], projection='3d')
-ax.axis('off')
+ax.axis('on')
 
 # choose a different color for each trajectory
 colors = plt.cm.jet(np.linspace(0, 1, N_trajectories))
@@ -81,7 +81,7 @@ anim = animation.FuncAnimation(fig, animate, init_func=init,
                                frames=500, interval=30, blit=True)
 
 # Save as mp4. This requires mplayer or ffmpeg to be installed
-anim.save('lorentz_attractor.mp4', fps=15)
+#anim.save('lorentz_attractor.mp4', fps=15)
 
 
 plt.show()
