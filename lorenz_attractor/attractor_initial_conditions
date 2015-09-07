@@ -1,0 +1,45 @@
+import numpy as np
+from scipy import integrate
+
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.colors import cnames
+from matplotlib import animation
+# uncomment if using ipython notebook
+#%matplotlib inline
+N_trajectories = 2
+
+
+def lorentz_deriv((x, y, z), t0, sigma=10., beta=8./3, rho=28.0):
+    """Compute the time-derivative of a Lorentz system."""
+    return [sigma * (y - x), x * (rho - z) - y, x * y - beta * z]
+
+# Choose random starting points, uniformly distributed from -15 to 15
+np.random.seed(1)
+
+#set initial conditions
+x0 = np.array([[ 15,   15 , 15],[14.5,14.5, 14.5]])
+
+# Solve for the trajectories
+t = np.linspace(3,18, 1000)
+x_t = np.asarray([integrate.odeint(lorentz_deriv, x0i, t)
+                  for x0i in x0])
+
+fig = plt.figure(figsize=[7,5]);
+plt.plot(t,x_t [0,:,2], label='Initial Conditions ')
+plt.plot(t,x_t [1,:,2], label='0.5 difference in Initial Conditions')
+plt.legend(loc='best' )
+
+plt.grid('off')
+
+#TODO: Make graph pretty with subplot
+ax = plt.subplot(111)
+ax.grid('on')
+ax.set_xlabel('Time')
+ax.set_ylabel('System Output')
+plt.savefig('attractor_initial_difference.png')
+plt.savefig('attractor_initial_difference.pdf')
+
+plt.show()
+
+
